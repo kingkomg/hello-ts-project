@@ -1,7 +1,6 @@
 const path = require('path');
 const slsw = require('serverless-webpack');
 const nodeExternals = require('webpack-node-externals');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -12,11 +11,6 @@ module.exports = {
     extensions: ['.mjs', '.json', '.ts'],
     symlinks: false,
     cacheWithContext: false,
-    plugins: [
-      new TsconfigPathsPlugin({
-        configFile: './tsconfig.paths.json',
-      }),
-    ],
   },
   output: {
     libraryTarget: 'commonjs',
@@ -27,7 +21,7 @@ module.exports = {
     concatenateModules: false,
   },
   target: 'node',
-  externals: [nodeExternals()],
+  externals: [nodeExternals(), "hello_js_layer", "hello_ts_layer"],
   module: {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
